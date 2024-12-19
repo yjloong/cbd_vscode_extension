@@ -1,0 +1,127 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "cbd",
+	"patterns": [
+		{"include": "#block"}
+	],
+	"repository": {
+		"block_keywords": {
+			"patterns": [{
+				"match": "\\b(^|\\G)(conf_block|g_block)\\b",
+				"name":"keyword.control.cbd"
+			}]
+		},
+		"block_name": {
+			"patterns": [
+				{
+					"match": "(\\$(\\(||\\{)?[a-zA-Z_]+(\\)|\\})?)",
+					"captures": {
+						"1": {
+							"name": "variable.other.cbd",
+							"patterns": [{"include": "source.shell"}]
+						}
+					}
+				},
+				{
+				"name": "variable.other",
+				"match": "\\b([a-zA-Z_]*)\\b"
+			}]
+		},
+		"space": {
+			"patterns": [
+				{
+					"match": "\\s+",
+					"name": "punctuation.separator.cbd"
+				}
+			]
+		},
+		"shell_style": {
+			"patterns": [
+				{
+					"begin": "^\\s+(sh_cmd|output_dir|include|cflags|compiler|src|link)\\s*:\\s*\\{",
+					"end": "^\\s*\\}\\s*$",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.block.cbd"
+						}
+					},
+					"patterns": [{"include": "source.shell"}]
+				},
+				{
+					"begin": "^\\s+(sh_cmd|output_dir|include|cflags|compiler|src|link)\\s*:\\s*",
+					"end": "$",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.cbd"
+						}
+					},
+					"patterns": [{"include": "source.shell"}]
+					
+				}
+				
+			]
+		},
+		"python_style": {
+			"patterns": [
+				{
+					"begin": "^\\s+(py_cmd)\\s*:\\s*\\{\\s*$",
+					"end": "^\\s*\\}\\s*$",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.py.cbd"
+						}
+					},
+					"patterns": [{"include": "source.python"}]
+				},
+				{
+					"begin": "^\\s+(py_cmd)\\s*:\\s*",
+					"end": "$",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.py.cbd"
+						}
+					},
+					"patterns": [{"include": "source.python"}]
+					
+				}
+			]
+		},
+		
+		"block_content": {
+			"begin": "\\{",
+			"end": "^\\}\\s*$",
+			"patterns": [
+				{"include": "#python_style"},
+				{"include": "#shell_style"}
+				
+			],
+			"name": "block_content.block.cbd"
+		},
+		"block_header": {
+			"begin": "^",
+			"end": ":\\s*",
+			"patterns": [
+			{
+				"include": "#block_keywords"
+			}, 
+			{
+				"include": "#space"
+			},
+			{
+				"include": "#block_name"
+			}
+		]
+		},
+		"block": {
+			"patterns": [
+				{
+					"include": "#block_header"
+				},
+				{
+					"include": "#block_content"
+				}
+			]
+		}
+	},
+	"scopeName": "source.cbd"
+}

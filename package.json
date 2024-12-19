@@ -1,0 +1,35 @@
+{
+  "name": "cbd",
+  "displayName": "cbd",
+  "description": "C Build Directly.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "cbd",
+      "aliases": ["cbd", "cbd"],
+      "extensions": [".cbd"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "cbd",
+      "scopeName": "source.cbd",
+      "path": "./syntaxes/cbd.tmLanguage.json"
+    }],
+    "snippets": [
+      {
+        "language": "cbd",
+        "path": "./snippets/snippets.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    
+  }
+}

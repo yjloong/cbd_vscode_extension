@@ -1,0 +1,27 @@
+{
+    "conf_block": {
+        "prefix": "conf_block",
+        "body": [
+            "conf_block ${1:name}: {",
+            "    output_dir: ${2:./build}",
+            "    compiler: gcc",
+            "    include: ./",
+            "    cflags: {",
+            "        -O2",
+            "        -Wall",
+            "    }",
+            "}"
+        ],
+        "description": "conf_block"
+    },
+    "g_block": {
+        "prefix": "g_block",
+        "body": [
+            "g_block ${1:name}: {",
+            "    src: {",
+            "    }",
+            "}"
+        ],
+        "description": "g_block"
+    }
+}
